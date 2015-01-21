@@ -1,0 +1,16 @@
+{% extends "site_base.html" %}
+{% load staticfiles %}
+{% load thumbnail %}
+
+{% block extrastyle %}
+	<link href="{% static 'css/product.css' %}" type="text/css"  rel="stylesheet"/>
+{% endblock %}
+
+
+{% block content %}
+	<div class="inner">
+		<h1>{{ flatpage.title }}</h1>
+		{{ flatpage.content }}
+		{{ django.contrib.flatpages.views.flatpage }}
+	</div>
+{% endblock content %}

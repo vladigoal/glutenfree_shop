@@ -1,0 +1,40 @@
+{% extends "site_base.html" %}
+{% load staticfiles %}
+{% load thumbnail %}
+
+{% block extrastyle %}
+	<link href="{% static 'css/catalog.css' %}" type="text/css"  rel="stylesheet"/>
+{% endblock %}
+
+{% block content %}
+	<div class="catalog">
+		{% if view.recipes %}
+			{% for item in view.recipes %}
+				<div class="col-sm-3" add-to-cart="{{ item.json }}" style="height: 305px;">
+					{% if item.image %}
+						{% if item.image.width > item.image.height %}
+							{% thumbnail item.image "184" as im %}
+								<a href="/recipe/{{ item.slug }}/" class="img" style="background-image: url({{ im.url }});"></a>
+							{% endthumbnail %}
+						{% else %}
+							{% thumbnail item.image "x184" as im %}
+								<a href="/recipe/{{ item.slug }}/" class="img" style="background-image: url({{ im.url }});"></a>
+							{% endthumbnail %}
+						{% endif %}
+					{% else %}
+						<a href="/recipe/{{ item.slug }}/" class="img" style="background-image: url(http://placehold.it/214x214/f3ede1&text=NO%20PHOTO);"></a>
+					{% endif %}
+					<a href="/recipe/{{ item.slug }}/" title="{{ item.name }}" class="name">{{ item.name|truncatechars:60 }}</a>
+<!-- 					<div class="buy">
+						<div class="price">{{ item.sell_price }} грн.</div>
+						<span class="add-to-cart-btn">в корзину</span>
+					</div> -->
+				</div>
+			{% endfor %}
+		{% else %}
+			<div class="inner">
+				<p style="padding: 30px;">Нет товаров</p>
+			</div>
+		{% endif %}
+	</div>
+{% endblock content %}

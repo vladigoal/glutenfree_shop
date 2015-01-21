@@ -1,0 +1,72 @@
+{% extends "site_base.html" %}
+{% load staticfiles %}
+{% load thumbnail %}
+{% load recipe_product_margin %}
+
+{% block extrastyle %}
+	<link href="{% static 'css/recipe.css' %}" type="text/css"  rel="stylesheet"/>
+{% endblock %}
+
+
+{% block content %}
+	<div class="inner">
+		<h1>{{ recipe.0.name }}</h1>
+		<div class="recipe-details">
+			<div class="image pull-left">
+				{% if recipe.0.image %}
+					{% thumbnail recipe.0.image "260" crop="center" as im %}
+						<img src="{{ im.url }}" alt="" width="260">
+					{% endthumbnail %}
+				{% else %}
+					<img src="http://placehold.it/260x160/f3ede1/&text=NO%20PHOTO" />
+				{% endif %}
+			</div>
+
+			<div class="pull-left" style="width: 295px;">
+				<div class="ttl">Ингредиенты:</div>
+				<div class="txt">
+					{{ recipe.0.ingredients|safe }}
+				</div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+
+		<div class="cook_ttl" style="margin-top: 20px;">Приготовление:</div>
+		<div class="cook_txt">
+			{{ recipe.0.cooking|safe }}
+		</div>
+
+		<div class="relative_ttl">Товары для рецепта:</div>
+
+		<div class="relative_products col-sm-12">
+				{% for item in relative_products %}
+					<div class="item {{ item|recipe_product_margin:forloop.counter }}" add-to-cart="{{ item.json }}">
+						{% if item.image %}
+							{% if item.image.width > item.image.height %}
+								{% thumbnail item.image "154" as im %}
+									<a href="/product/{{ item.slug }}/" class="img" style="background-image: url({{ im.url }});"></a>
+								{% endthumbnail %}
+							{% else %}
+								{% thumbnail item.image "x154" as im %}
+									<a href="/product/{{ item.slug }}/" class="img" style="background-image: url({{ im.url }});"></a>
+								{% endthumbnail %}
+							{% endif %}
+						{% else %}
+							<a href="/product/{{ item.slug }}/" class="img" style="background-image: url(http://placehold.it/214x214/f3ede1&text=NO%20PHOTO);"></a>
+						{% endif %}
+						<a href="/product/{{ item.slug }}/" title="{{ item.name }}" class="name">{{ item.name|truncatechars:60 }}</a>
+						<div class="buy">
+							<div class="price">{{ item.sell_price }} грн.</div>
+							<span class="add-to-cart-btn">в корзину</span>
+						</div>
+					</div>
+				{% endfor %}
+		</div>
+
+		<div class="full_recipe" add-recipe-to-cart="{{ buy_full_recipe_json }}">
+			<span class="pull-left add-to-cart-btn">Купить весь набор</span>
+		</div>
+
+	</div>
+
+{% endblock content %}

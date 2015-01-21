@@ -1,0 +1,118 @@
+body{
+	background-color: #f3ede1;
+}
+
+body>.container-fluid{
+	min-width: 1230px;
+}
+body .container-fluid>.container{
+	width: 1200px;
+}
+
+.main .container{
+	padding: 0;
+	background-color: #d7c4a8;
+}
+	.main .container .left_column{
+		float: left;
+		width: 268px;
+		font-family: Georgia;
+		font-style: italic;
+		border-right: 3px solid #d7c4a8;
+	}
+		.left_column .categories{
+			margin: 0;
+			padding: 43px 0 26px 28px;
+			list-style: none;
+			background-color: #86a458;
+		}
+			.left_column .categories li{
+				width: 211px;
+				margin-bottom: 14px;
+				font-size: 16px;
+			}
+				.left_column .categories li a{
+					color: #fff;
+				}
+				.left_column .categories li span{
+					color: #6a6754;
+				}
+		.left_column .recipe{
+			background-color: #fff;
+		}
+			.left_column .recipe .ttl{
+				width: 100%;
+				height: 43px;
+				padding-left: 28px;
+				color: #fff;
+				font-size: 24px;
+				line-height: 43px;
+				background: #d7c4a8;
+			}
+			.left_column .recipe .info{
+				padding: 0 28px 10px 28px;
+			}
+				.left_column .recipe .info .name{
+					color: #75580a;
+					font-size: 20px;
+					margin: 15px 0;
+				}
+				.left_column .recipe .info .txt{
+					margin-bottom: 15px;
+					color: #75580a;
+					font-size: 14px;
+				}
+				.left_column .recipe .info .link{
+					color: #6f9b41;
+					font-size: 14px;
+				}
+
+
+.main .container .content{
+	float: left;
+	width: 932px;
+}
+
+
+.content>.inner{
+	width: 929px;
+	min-height: 500px;
+	padding: 20px 36px 40px 36px;
+	background: #ffffff;
+}
+	.content>.inner h1{
+		margin-top: 0;
+		padding: 0;
+		color: #75580a;
+		font-family: Georgia;
+		font-style: italic;
+		font-size: 24px;
+	}
+
+.login_btn{
+	display: inline-block;
+	margin-top: 15px;
+}
+	.login_btn img{
+		width: 180px;
+	}
+
+footer .footer1 .container{
+	height: 30px;
+	background: url(../img/header/pattern_bg.jpg) center top no-repeat;
+}
+footer .footer2{
+	background-color: #d7c4a8;
+}
+	footer .footer2 .container{
+		height: 53px;
+		background: url(../img/footer_bg.jpg) center top no-repeat;
+	}
+
+.left_column .categories:after, .content .inner:after{
+	content:'.';
+  clear:both;
+  height: 0;
+  display: block;
+  visibility: hidden;
+}

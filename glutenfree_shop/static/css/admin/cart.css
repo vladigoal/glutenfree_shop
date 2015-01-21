@@ -1,0 +1,7 @@
+.button.print_order{
+	color: #000000;
+	display: inline-block !important;
+}
+	.button.print_order:hover{
+		cursor: pointer;
+	}

@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+      <title>Сертифікат</title>
+      <style type="text/css">
+          @font-face {
+              font-family: "Helvetica";
+	            src: url("{{ font_path }}/DejaVuLGCSans.ttf");
+          }
+          @page {
+              size: {{ pagesize }};
+              margin: 1cm;
+              @frame footer {
+                  -pdf-frame-content: footerContent;
+                  bottom: 0cm;
+                  margin-left: 9cm;
+                  margin-right: 9cm;
+                  height: 1cm;
+              }
+          }
+          body{
+              font-family: "Helvetica";
+              font-size: 12px;
+          }
+          h1{
+              margin-top: 160px;
+              font-size: 18px;
+              line-height: 30px;
+          }
+          table.prod_info td{
+              padding: 2px 5px;
+              vertical-align: middle;
+          }
+          strong{
+              font-weight: bold;
+          }
+      </style>
+  </head>
+  <body>
+   	{% load multiply %}
+    {% for cart in carts %}
+	    {%block page_foot%}
+			<table width="100%">
+	        <tr>
+	            <td>
+	                &nbsp;
+	            </td>
+	        </tr>
+	        <tr>
+	            <td width="50%" class="order_num">
+	                <h1>Заказ № {{ cart.order.tm_created|date:"d/m/y"|lower }}-{{ cart.order.id }}</h1>
+	            </td>
+	        </tr>
+	        <tr>
+	            <td>
+	                &nbsp;
+	            </td>
+	        </tr>
+
+	        <tr>
+	            <td width="50%" class="order_num">
+	                ФИО: {{ cart.order.name }}
+	            </td>
+	        </tr>
+					<tr>
+	            <td width="50%" class="order_num">
+	                Адресс доставки: {{ cart.order.address }}
+	            </td>
+	        </tr>
+					<tr>
+	            <td width="50%" class="order_num">
+	                Телефон: {{ cart.order.phone }}
+	            </td>
+	        </tr>
+					<tr>
+	            <td width="50%" class="order_num">
+	                E-mail: {{ cart.order.email }}
+	            </td>
+	        </tr>
+					<tr>
+	            <td>
+	                &nbsp;
+	            </td>
+	        </tr>
+					<tr>
+	            <td width="50%" class="order_num">
+	                Дата заказа: {{ cart.order.tm_created }}
+	            </td>
+	        </tr>
+					<tr>
+	            <td width="50%" class="order_num">
+	                Дата печати заказа: {{ now }}
+	            </td>
+	        </tr>
+					<tr>
+	            <td>
+	                &nbsp;
+	            </td>
+	        </tr>
+       </table>
+       <table width="100%" border="1" class="prod_info">
+            <tr style="background-color: #d0d0d0">
+	            <td width="25">№</td>
+	            <td>Наименование</td>
+				<td width="60" align="center">Цена</td>
+				<td width="60" align="center">Кол-во</td>
+				<td width="60" align="center">Сумма</td>
+            </tr>
+              {% for order_products in cart.order_products %}
+                <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{ order_products.product.name }}</td>
+                  <td align="right">{{ order_products.sell_price }}</td>
+                  <td align="right">{{ order_products.count }}</td>
+                  <td align="right">{{ order_products.sell_price|multiply:order_products.count }}</td>
+                </tr>
+								{% endfor %}
+            <tr>
+                <td colspan="4">Итого:</td>
+                  <td align="right">{{ cart.total_price }}</td>
+                </tr>
+            {% if cart.order.discount != 0 %}
+                <tr>
+                <td colspan="4">Скидка:</td>
+                  <td align="right">{{ cart.order.discount }}</td>
+                </tr>
+                <tr>
+                <td colspan="4">Итого со скидкой:</td>
+                  <td align="right">{{ cart.total_price_discount }}</td>
+                </tr>
+			{% endif %}
+        </table>
+        <pdf:nextpage />
+	    {%endblock page_foot%}
+    {% endfor %}
+  </body>
+</html>

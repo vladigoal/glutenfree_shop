@@ -1,0 +1,21 @@
+{% extends "site_base.html" %}
+{% load staticfiles %}
+
+{% block extrastyle %}
+	<link href="{% static 'css/profile.css' %}" type="text/css"  rel="stylesheet"/>
+{% endblock %}
+
+{% block content %}
+	<div class="inner">
+		<h1>Авторизация</h1>
+
+		{% if request.user.is_authenticated %}
+			<p>Вы уже авторизировались</p>
+		{% else %}
+			{% include 'login_form.html' %}
+			<a href="/login/facebook/" class="login_btn"><img src="{% static 'img/facebook-login-button.png' %}" /></a>
+		{% endif %}
+
+
+	</div>
+{% endblock content %}

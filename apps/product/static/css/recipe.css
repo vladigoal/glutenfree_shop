@@ -1,0 +1,125 @@
+.content>.inner{
+	min-height: 0;
+	padding-bottom: 0;
+}
+.recipe-details>.image{
+	margin-right: 20px;
+}
+
+.recipe-details .ttl, .relative_ttl, .cook_ttl{
+	margin-bottom: 5px;
+	color: #75580a;
+	font-family: Georgia;
+	font-style: italic;
+	font-size: 15px;
+	font-weight: bold;
+}
+
+.relative_ttl{
+	margin-top: 40px;
+}
+.cook_ttl{
+	margin-top: 10px;
+}
+
+.recipe-details .txt, .cook_txt{
+	font-size: 13px;
+}
+
+.relative_products{
+	margin-bottom: 10px;
+	padding: 0;
+}
+	.relative_products .item{
+		position: relative;
+		float: left;
+		width: 206px;
+		height: 290px;
+		margin: 4px;
+		padding: 6px;
+		background-color: #ffffff;
+		border: 3px solid #f3ede1;
+	}
+		.relative_products .item.nomargin{
+			margin-left: 0;
+		}
+
+		.relative_products>div .img{
+			display: block;
+			height: 144px;
+			background-repeat: no-repeat;
+			background-position: center center;
+		}
+
+		.relative_products>div .name{
+			display: block;
+			margin: 9px 0;
+			padding-left: 8px;
+			color: #75580a;
+			font-family:"Calibri";
+			font-size: 14px;
+			line-height: 1.2em;
+			text-transform: uppercase;
+		}
+		.relative_products>div .buy{
+			position: absolute;
+			left: 8px;
+			bottom: 9px;
+			width: 214px;
+			height: 36px;
+			font-family:"Calibri W10 Bold";
+			line-height: 36px;
+			text-align: center;
+		}
+			.relative_products>div .buy .price{
+				float: left;
+				width: 91px;
+				height: 36px;
+				color: #75580a;
+				font-size: 16px;
+				border: 1px solid #d7c4a8;
+				border-right: 0;
+			}
+			.relative_products>div .buy .add-to-cart-btn{
+				float: left;
+				display: block;
+				width: 93px;
+				height: 36px;
+				color: #ffffff;
+				font-size: 14px;
+				text-transform: uppercase;
+				background: #6f9b41;
+			}
+				.relative_products>div .buy .add-to-cart-btn:hover{
+					cursor: pointer;
+				}
+
+.full_recipe{
+	padding: 10px 0;
+	margin-bottom: 30px;
+}
+
+	.full_recipe .add-to-cart-btn{
+		display: block;
+		width: 207px;
+		padding: 5px 0;
+		color: #75580a;
+		font-family: Georgia;
+		font-style: italic;
+		font-size: 15px;
+		text-align: center;
+		background-color: #f3ede1;
+	}
+	.full_recipe	.add-to-cart-btn:hover{
+		cursor: pointer;
+		text-decoration: underline;
+	}
+
+
+.relative_products:after, .full_recipe:after{
+	content:'.';
+  clear:both;
+  height: 0;
+  display: block;
+  visibility: hidden;
+}

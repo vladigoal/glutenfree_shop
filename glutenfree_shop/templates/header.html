@@ -1,0 +1,99 @@
+{% load staticfiles %}
+{% load bootstrap3 %}
+{% load flatpages %}
+{% get_flatpages as flatpages %}
+
+<header ng-init="cart={{cart_data}}">
+	<div class="container-fluid header1">
+		<div class="container">
+			<a class="logo" href="/"><img src="{% static 'img/header/logo.png' %}" /></a>
+
+			<a class="basket" href="/cart">
+				<span class="ttl">Корзина</span>
+				<div class="dropdown">
+				  <div class="btn" type="button" id="dropdown_basket">
+					  <span class="item ttl" style="width: 56px;">&nbsp;</span>
+					  <span class="item prod_amount">(<span ng-bind="productsAmount()"></span>)</span>
+					  <span class="item separ"></span>
+					  <span class="item price" ng-bind="calcTotal()">0,00</span>
+					  <span class="item uah">&nbsp;грн.</span>
+				    <span class="item caret"></span>
+				  </div>
+				  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdown_basket">
+				    <li role="presentation" class="ttl" ng-show="cart.length">
+					    <span class="col-sm-6 cols-sm-offset-1 name">Название</span>
+					    <span class="col-sm-3">Цена</span>
+					    <span class="col-sm-2">Кол-во</span>
+				    </li>
+				    <li role="presentation" ng-repeat="product in cart">
+					    <span class="col-sm-6 cols-sm-offset-1 name">{$product.name$}</span>
+					    <span class="col-sm-3">{$product.pr} грн</span>
+					    <span class="col-sm-2 amount">{$product.count$}</span>
+					   </li>
+
+					  <li role="presentation" ng-hide="cart.length"><span class="name">Пусто :(</span></li>
+				  </ul>
+				</div>
+			</a>
+
+			<div class="info">
+				<div class="auth">
+					{% if request.user.is_authenticated %}
+						<a class="login" href="/logout/">выход</a>&nbsp;
+					{% else %}
+						<a class="login" href="/login/">вход</a>&nbsp;
+						<a class="reg" href="/registration/">регистрация</a>
+					{% endif %}
+				</div>
+
+				<div class="phone">(044) 384 29 35</div>
+			</div>
+
+			<menu>
+				{% for item in top_menu %}					
+<!-- 					{% if page.url == item.url %}
+						<li><span>{{ item.name }}</span></li>
+					{% else %} -->
+						<li><a href="{{ item.url }}">{{ item.name }}</a></li>
+					<!-- {% endif %} -->
+				{% endfor %}
+
+{#				<li><a href="/about/">О глютене</a></li>#}
+{#				<li><a href="/recipes/">Рецепты</a></li>#}
+{#				<li><a href="/celiac/">Целиакия и симптомы</a></li>#}
+{#				<li><a href="/shipping/">Доставка и оплата</a></li>#}
+{#				<li><a href="/contacts/">Контакты</a></li>#}
+			</menu>
+		</div>
+	</div>
+
+	<div class="container-fluid header2">
+		<div class="container">
+			<div class="block products">Продукты</div>
+			<div class="block service">
+
+				<div class="sort">
+					<div class="dropdown">
+					  <div class="btn" type="button" id="dropdown_sort" data-toggle="dropdown">
+						  <span class="ttl">Сортировать</span>
+						  <span class="caret"></span>
+					  </div>
+					  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdown_sort">
+					    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Популярные</a></li>
+						  <li role="presentation"><a role="menuitem" tabindex="-1" href="/?sort=soya_free">Без яиц</a></li>
+						  <li role="presentation"><a role="menuitem" tabindex="-1" href="/?sort=lactose_free">Без лактозы</a></li>
+						  <li role="presentation"><a role="menuitem" tabindex="-1" href="/?sort=kazein_free">Без казеина</a></li>
+						  <li role="presentation"><a role="menuitem" tabindex="-1" href="/?sort=soya_soya_free">Без сои</a></li>
+					  </ul>
+					</div>
+				</div>
+
+				<form class="search_form" method="get" action="/search">
+					<input name="searchword" value="{{ request.GET.searchword }}" placeholder="поиск">
+					<button></button>
+				</form>
+
+			</div>
+		</div>
+	</div>
+</header>

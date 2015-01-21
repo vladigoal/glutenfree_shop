@@ -1,0 +1,55 @@
+.content .catalog>div{
+		height: 349px;
+		padding: 9px 8px;
+		background-color: #ffffff;
+		border-right: 3px solid #d7c4a8;
+		border-bottom: 3px solid #d7c4a8;
+	}
+		.catalog>div .img{
+			display: block;
+			height: 214px;
+			background-repeat: no-repeat;
+			background-position: center center;
+		}
+		.catalog>div .name{
+			display: block;
+			margin: 17px 0 33px 0;
+			padding-left: 8px;
+			color: #75580a;
+			font-family:"Calibri";
+			font-size: 16px;
+			line-height: 1.2em;
+			text-transform: uppercase;
+		}
+		.catalog>div .buy{
+			position: absolute;
+			left: 8px;
+			bottom: 9px;
+			width: 214px;
+			height: 36px;
+			font-family:"Calibri W10 Bold";
+			line-height: 36px;
+			text-align: center;
+		}
+			.catalog>div .buy .price{
+				float: left;
+				width: 96px;
+				height: 36px;
+				color: #75580a;
+				font-size: 17px;
+				border: 1px solid #d7c4a8;
+				border-right: 0;
+			}
+			.catalog>div .buy .add-to-cart-btn{
+				float: left;
+				display: block;
+				width: 118px;
+				height: 36px;
+				color: #ffffff;
+				font-size: 16px;
+				text-transform: uppercase;
+				background: #6f9b41;
+			}
+				.catalog>div .buy .add-to-cart-btn:hover{
+					cursor: pointer;
+				}

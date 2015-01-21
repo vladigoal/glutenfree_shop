@@ -1,0 +1,24 @@
+#reg_form{
+	width: 600px;
+	text-align: left;
+}
+
+#reg_form	label{
+	color: #75580a;
+	font-family: Georgia;
+}
+#reg_form button{
+	font-family: Georgia;
+}
+
+#login_from{
+	margin-top: 20px;
+}
+
+.form-inline .form-group{
+	width: 180px;
+	margin-right: 8px;
+}
+	.form-inline .form-group .form-control{
+		width: 180px;
+	}

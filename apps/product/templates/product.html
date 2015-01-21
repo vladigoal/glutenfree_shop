@@ -1,0 +1,56 @@
+{% extends "site_base.html" %}
+{% load staticfiles %}
+{% load thumbnail %}
+
+{% block extrastyle %}
+	<link href="{% static 'css/product.css' %}" type="text/css"  rel="stylesheet"/>
+{% endblock %}
+
+
+{% block content %}
+	<div class="inner">
+		<h1>{{ product.0.name }}</h1>
+		<div class="prod-details" add-to-cart="{{ product.0.json }}">
+			<div class="image pull-left">
+				{% thumbnail product.0.image "260" crop="center" as im %}
+					<img src="{{ im.url }}" alt="" width="260">
+				{% endthumbnail %}
+			</div>
+
+			<div class="pull-left" style="width: 295px;">
+				<ul>
+					<li>
+						<strong>Вес/обьем:</strong> {{product.0.bulk}}
+					</li>
+				</ul>
+				<div class="price">
+					{% if product.0.isActive %}
+						<div class="sell-price pull-right">
+							{{product.0.pr}} <span style="font-size: 14px;font-weight: normal;">грн</span>
+						</div>
+						Цена:
+					{% else %}
+						<div style="text-align: right;">Нет в наличии</div>
+					{% endif %}
+				</div>
+				{% if product.0.isActive %}
+					<div class="add-to-cart">
+						<a class="add-to-cart-btn pull-right" href="#">добавить&nbsp;в&nbsp;корзину</a>
+						<span style="font-size: 11px;">
+							Количество:
+
+						</span>
+						<input type="text" name="pcount" style="width: 25px; font-size: 14px;color: #a3276d;line-height: 14px;" value="1">
+					</div>
+				{% endif %}
+			</div>
+			<div class="clearfix"></div>
+		</div>
+
+		<div class="prod-description">
+			{{product.0.description|safe}}
+		</div>
+
+	</div>
+
+{% endblock content %}

@@ -1,0 +1,99 @@
+{% extends "site_base.html" %}
+{% load staticfiles %}
+
+{% block extrastyle %}
+	<link href="{% static 'css/cart.css' %}" type="text/css"  rel="stylesheet"/>
+{% endblock %}
+
+
+{% block content %}
+	<div class="inner" ng-init="user={{user_data}}">
+		<h1>Корзина</h1>
+
+		<div ng-hide="cart.length">
+			<div class="done_msg">Пусто :(</div>
+			<br/>
+			<a class="back_link" href="/"><img src="{% static 'img/cart/back_link.jpg' %}"></a>
+		</div>
+
+		<div class="cart_products" ng-show="cart.length">
+			<div class="ttl">
+				<div class="col-sm-4 col-sm-offset-1 name">Наименование</div>
+				<div class="col-sm-2">вес/объем</div>
+				<div class="col-sm-2">цена</div>
+				<div class="col-sm-1">кол-во</div>
+				<div class="col-sm-1">всего</div>
+				<div class="col-sm-1"></div>
+			</div>
+
+			<table width="100%">
+				<tr ng-repeat="product in cart">
+					<td class="col-sm-1">
+						<img src="{$ product.image $}" />
+					</td>
+					<td class="col-sm-4 name">
+						{$product.name$}
+					</td>
+					<td class="col-sm-2">{$product.bulk$}</td>
+					<td class="col-sm-2">{$product.pr$} грн</td>
+					<td class="col-sm-1">
+						<input type="text" ng-model="product.count" ng-change="product.count=onlyNumber(product.count)" style="width: 30px; text-align: center">
+					</td>
+					<td class="col-sm-1">{$ product.pr*product.count$} грн</td>
+					<td class="col-sm-1 del">
+						<span ng-click="removeItem($index)"><img src="{% static 'img/cart/delete.png' %}" /></span>
+					</td>
+				</tr>
+			</table>
+
+			<div class="shipping_txt">Доставка:  по Киеву — 40,00 грн., по Украине — согласно тарифам «Новой Почты».</div>
+
+			<div class="total_wrap">
+				<div class="pull-left btn-continue">
+					<a class="back_link" href="/"><img src="{% static 'img/cart/back_link.jpg' %}"></a>
+				</div>
+
+				<div class="total pull-right">
+					<div class="sell-price pull-right"><span ng-bind="calcTotal()">00,00</span> грн</div>
+					Всего:&nbsp;
+				</div>
+			</div>
+
+			{% if request.user.is_authenticated == False %}
+				<div class="form_title">Заказ</div>
+				{% include 'login_form.html' %}
+				<a href="/login/facebook/" class="login_btn"><img src="{% static 'img/facebook-login-button.png' %}" /></a>
+			{% endif %}
+
+			<div class="form_title">Контакты</div>
+			<form role="form" ng-model="order_form" name="order_form" id="order_form" ng-submit="onSubmit()">
+				<div class="bblock">
+					  <div class="form-group">
+					    <label for="exampleInputEmail1">ФИО*</label>
+					    <input type="fio" name="fio" ng-model="user.name" class="form-control" required>
+					  </div>
+					  <div class="clearfix"></div>
+					  <div class="form-group pull-left" style="width: 248px;">
+					    <label for="exampleInputPassword1">Телефон*</label>
+					    <input type="text" name="phone" ng-model="user.phone" class="form-control" id="exampleInputPassword1" placeholder="" required>
+					  </div>
+					  <div class="form-group pull-right" style="width: 248px;">
+					    <label for="exampleInputPassword1">E-mail (<span style="font-size: 10px;">для получения подтверждения</span>)</label>
+					    <input type="email" name="email" ng-model="user.email" class="form-control" id="exampleInputPassword1" placeholder="">
+					  </div>
+					  <div class="clearfix"></div>
+			        <div class="form-group">
+					    <label for="exampleInputEmail1">Адрес доставки/комментарий</label>
+					    <textarea name="adress" id="" cols="10" class="form-control" rows="3" required>{{view.getLastAdress}}</textarea>
+					  </div>
+						{% csrf_token %}
+
+				</div>
+				<div style="text-align: center;">
+					<button type="submit" href="" class="btn enabled">отправить заказ</button>
+				</div>
+			</form>
+
+		</div>
+	</div>
+{% endblock content %}
